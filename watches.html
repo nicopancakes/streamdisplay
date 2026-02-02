@@ -15,8 +15,8 @@
     }
     #map, #reload {
         height: 100vh;
-        display: none;
         object-fit: contain;
+        display: none;
     }
 </style>
 
@@ -25,35 +25,28 @@
         const map = document.getElementById("map");
         const reloadImg = document.getElementById("reload");
 
-        // Hide map, show reload image
         map.style.display = "none";
         reloadImg.style.display = "block";
 
-        // After 2 seconds, reload the map and show it
         setTimeout(() => {
-            map.src = "https://forecast.weather.gov/wwamap/png/US.png?cb=" + Date.now();
+            map.src =
+                "https://www.spc.noaa.gov/products/watch/validww.png?cb=" +
+                Date.now();
+
             reloadImg.style.display = "none";
             map.style.display = "block";
-        }, 2000);
+        }, 1000);
     }
 
-    // Refresh every 60 seconds
-    setInterval(refreshMap, 60000);
-
-    // Initial load
     window.onload = () => {
-        document.getElementById("map").style.display = "block";
+        refreshMap();               // initial load
+        setInterval(refreshMap, 60000); // refresh every 60s
     };
 </script>
-
 </head>
+
 <body>
-
-    <!-- Main NWS map -->
-    <img id="map" src="https://www.spc.noaa.gov/products/watch/validww.png">
-
-    <!-- Reload animation image -->
+    <img id="map">
     <img id="reload" src="https://files.catbox.moe/zp7z2y.png">
-
 </body>
 </html>
